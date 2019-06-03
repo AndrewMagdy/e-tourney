@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import RootRouter from "./routes/";
+import { ConnectedRouter } from "connected-react-router";
+import store, { history } from "./store/configureStore";
+import AppGrid from "./components/AppGrid.component";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import theme from "./constants/theme";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        <ConnectedRouter history={history}>
+          <AppGrid>
+            <RootRouter />
+          </AppGrid>
+        </ConnectedRouter>
+      </MuiThemeProvider>
+    </Provider>
   );
 }
 
